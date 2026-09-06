@@ -3,7 +3,13 @@
 import { useState, useMemo } from "react";
 import type { GameCard } from "@/service/gameService";
 import CardItem from "./CardItem";
-import { Search, SlidersHorizontal, X } from "lucide-react";
+import {
+  ArrowLeft,
+  ArrowRight,
+  Search,
+  SlidersHorizontal,
+  X,
+} from "lucide-react";
 
 type GamesExplorerProps = {
   games: GameCard[];
@@ -11,6 +17,7 @@ type GamesExplorerProps = {
 
 export default function GamesExplorer({ games }: GamesExplorerProps) {
   const [searchQuery, setSearchQuery] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
   const [selectedGenre, setSelectedGenre] = useState<string>("All");
   const [sortBy, setSortBy] = useState<
     "popular" | "metacritic" | "rating" | "year"
@@ -61,6 +68,13 @@ export default function GamesExplorer({ games }: GamesExplorerProps) {
     return result;
   }, [games, searchQuery, selectedGenre, sortBy]);
 
+  const ITEMS_PER_PAGE = 10;
+  const totalPages = Math.ceil(filteredGames.length / ITEMS_PER_PAGE);
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+  const paginatedGames = filteredGames.slice(
+    startIndex,
+    startIndex + ITEMS_PER_PAGE,
+  );
   return (
     <section
       id="explore"
@@ -76,7 +90,8 @@ export default function GamesExplorer({ games }: GamesExplorerProps) {
             Curated Game Directory
           </h2>
           <p className="text-xs sm:text-sm text-neutral-400 max-w-lg">
-            Discover verified titles, Metacritic ratings, and platform releases directly from RAWG.
+            Discover verified titles, Metacritic ratings, and platform releases
+            directly from RAWG.
           </p>
         </div>
 
@@ -86,7 +101,10 @@ export default function GamesExplorer({ games }: GamesExplorerProps) {
           <input
             type="text"
             value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
+            onChange={(e) => {
+              setSearchQuery(e.target.value);
+              setCurrentPage(1);
+            }}
             placeholder="Search game or genre..."
             className="w-full pl-9 pr-8 py-2 rounded-full bg-[#161616] border border-neutral-800 focus:border-neutral-600 text-xs text-white placeholder-neutral-500 transition-all outline-none"
           />
@@ -110,7 +128,10 @@ export default function GamesExplorer({ games }: GamesExplorerProps) {
             return (
               <button
                 key={genre}
-                onClick={() => setSelectedGenre(genre)}
+                onClick={() => {
+                  setSelectedGenre(genre);
+                  setCurrentPage(1);
+                }}
                 className={`px-3.5 py-1 rounded-full text-xs font-normal whitespace-nowrap transition-all duration-200 cursor-pointer ${
                   isActive
                     ? "bg-white text-black font-medium"
@@ -147,7 +168,11 @@ export default function GamesExplorer({ games }: GamesExplorerProps) {
       {/* Status Bar */}
       <div className="flex items-center justify-between text-[11px] text-neutral-400 pb-5">
         <span>
-          Showing <strong className="text-white font-medium">{filteredGames.length}</strong> games
+          Showing{" "}
+          <strong className="text-white font-medium">
+            {filteredGames.length}
+          </strong>{" "}
+          games
           {selectedGenre !== "All" && ` in ${selectedGenre}`}
         </span>
         {searchQuery && (
@@ -159,18 +184,50 @@ export default function GamesExplorer({ games }: GamesExplorerProps) {
 
       {/* Game Cards Grid */}
       {filteredGames.length > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {filteredGames.map((game) => (
-            <CardItem key={game.id} game={game} />
-          ))}
-        </div>
+        <>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {paginatedGames.map((game) => (
+              <CardItem key={game.id} game={game} />
+            ))}
+          </div>
+          <div className="flex items-center justify-end gap-2 pt-6">
+            {/* Tombol Prev */}
+            <button
+              onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+              disabled={currentPage === 1}
+              className="w-9 h-9 rounded-full border border-neutral-800 bg-[#161616] text-neutral-400 hover:text-white hover:bg-neutral-800 disabled:opacity-30 disabled:cursor-not-allowed flex items-center justify-center transition-all cursor-pointer"
+              aria-label="Previous page"
+            >
+              <ArrowLeft className="w-4 h-4" />
+            </button>
+
+            {/* Nomor Halaman */}
+            <div className="px-3.5 h-9 rounded-full border border-neutral-800 bg-[#161616] text-xs font-mono text-neutral-300 flex items-center justify-center">
+              {currentPage} / {totalPages || 1}
+            </div>
+
+            {/* Tombol Next */}
+            <button
+              onClick={() =>
+                setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+              }
+              disabled={currentPage >= totalPages}
+              className="w-9 h-9 rounded-full border border-neutral-800 bg-[#161616] text-neutral-400 hover:text-white hover:bg-neutral-800 disabled:opacity-30 disabled:cursor-not-allowed flex items-center justify-center transition-all cursor-pointer"
+              aria-label="Next page"
+            >
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          </div>
+        </>
       ) : (
         /* Empty State */
         <div className="py-20 flex flex-col items-center justify-center text-center bg-[#161616] border border-neutral-800/80 rounded-2xl p-8">
           <div className="w-12 h-12 rounded-full bg-neutral-900 flex items-center justify-center text-neutral-500 mb-3 border border-neutral-800">
             <Search className="w-5 h-5" />
           </div>
-          <h3 className="text-base font-semibold text-white mb-1">No results found</h3>
+          <h3 className="text-base font-semibold text-white mb-1">
+            No results found
+          </h3>
           <p className="text-xs text-neutral-400 max-w-xs mb-5">
             No games match &ldquo;{searchQuery}&rdquo; in {selectedGenre}.
           </p>

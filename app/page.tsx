@@ -4,7 +4,8 @@ import GamesExplorer from "@/components/GamesExplorer";
 import SpotlightSection from "@/components/SpotlightSection";
 import Footer from "@/components/Footer";
 import { getGames, GameCard } from "@/service/gameService";
-import { Gamepad2, ShieldCheck, Sparkles, Monitor, ArrowUpRight } from "lucide-react";
+import { Gamepad2, ShieldCheck, Monitor, ArrowUpRight } from "lucide-react";
+import GridParticles from "@/components/GridParticles";
 
 export default async function Home() {
   const games: GameCard[] = await getGames();
@@ -26,7 +27,7 @@ export default async function Home() {
         </section>
 
         {/* Minimalist Highlights / Stats Bar */}
-        <section className="border-y border-neutral-800/60 bg-[#141414]">
+        <section className="relative z-10 border-y border-neutral-800/60 bg-[#141414]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
             <div className="flex justify-between gap-6">
               <div className="flex items-center gap-3">
@@ -35,7 +36,7 @@ export default async function Home() {
                 </div>
                 <div>
                   <div className="text-sm font-semibold text-white">
-                    30+ Curated Titles
+                    25+ Curated Titles
                   </div>
                   <div className="text-xs text-neutral-400">
                     Trending games list
@@ -73,6 +74,7 @@ export default async function Home() {
             </div>
           </div>
         </section>
+        <GridParticles/>
 
         {/* Editor's Choice Spotlight */}
         {spotlightGame && <SpotlightSection game={spotlightGame} />}

@@ -16,6 +16,11 @@ export const metadata: Metadata = {
   title: "Review Game — Video Game Reviews & Metacritic Ratings",
   description:
     "An educational project showcasing video game reviews, ratings, platforms, and Metacritic scores powered by RAWG API.",
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({
