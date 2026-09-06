@@ -10,23 +10,19 @@ import GridParticles from "@/components/GridParticles";
 export default async function Home() {
   const games: GameCard[] = await getGames();
 
-  // Pick highest metacritic game for the Spotlight feature
   const spotlightGame =
     [...games].sort((a, b) => (b.metacritic || 0) - (a.metacritic || 0))[0] ||
     games[0];
 
   return (
     <div className="min-h-screen flex flex-col bg-[#121212] text-neutral-200">
-      {/* Top Navbar */}
       <Navbar />
 
       <main className="flex-1 w-full">
-        {/* Minimalist Hero Swiper Section */}
         <section className="relative w-full">
           <Hero games={games} />
         </section>
 
-        {/* Minimalist Highlights / Stats Bar */}
         <section className="relative z-10 border-y border-neutral-800/60 bg-[#141414]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
@@ -76,18 +72,15 @@ export default async function Home() {
         </section>
         <GridParticles/>
 
-        {/* Editor's Choice Spotlight */}
         {spotlightGame && <SpotlightSection game={spotlightGame} />}
 
-        {/* Interactive Games Explorer (Search, Filter, Sort, Grid) */}
         <GamesExplorer games={games} />
 
-        {/* Minimalist Portfolio Project Card / Note Section */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-12">
           <div className="relative overflow-hidden rounded-3xl bg-[#181818] border border-neutral-800/80 p-6 sm:p-8 md:p-12">
             <div className="max-w-2xl space-y-4">
               <span className="text-[11px] font-mono uppercase tracking-widest text-neutral-400">
-                {"// PORTFOLIO PROJECT"}
+                PORTFOLIO PROJECT
               </span>
               <h3 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
                 Designed for speed, clarity, and delight.
@@ -111,7 +104,6 @@ export default async function Home() {
         </section>
       </main>
 
-      {/* Footer */}
       <Footer />
     </div>
   );

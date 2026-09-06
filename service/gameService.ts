@@ -65,8 +65,6 @@ export async function getGames(): Promise<GameCard[]> {
   const data: RawgGameApiResponse = await response.json();
 
   const games: GameCard[] = data.results.map((game) => {
-    // Select high-resolution screenshot for hero banner if available
-    // Screenshot index 1 is usually an in-game 1080p full-HD capture
     const highResScreenshot =
       game.short_screenshots && game.short_screenshots.length > 1
         ? game.short_screenshots[1].image

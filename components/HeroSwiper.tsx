@@ -62,7 +62,6 @@ export default function Hero({ games }: HeroProps) {
               key={game.id}
               className="relative w-full h-full select-none"
             >
-              {/* Background Image */}
               <div className="absolute inset-0 w-full h-full">
                 {imageSrc ? (
                   <Image
@@ -79,14 +78,11 @@ export default function Hero({ games }: HeroProps) {
                 )}
               </div>
 
-              {/* Minimalist Dark Gradient Overlays */}
               <div className="absolute inset-0 bg-gradient-to-t from-[#121212] via-[#121212]/75 to-transparent" />
               <div className="absolute inset-0 bg-gradient-to-r from-[#121212]/95 via-[#121212]/70 to-transparent" />
 
-              {/* Hero Content Overlay */}
               <div className="relative z-10 h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-end pb-14 sm:pb-20 md:pb-24 pt-20 sm:pt-24 md:pt-28">
                 <div className="max-w-2xl lg:max-w-3xl space-y-3 sm:space-y-4">
-                  {/* Badges & Meta Info */}
                   <div className="flex flex-wrap items-center gap-2">
                     {game.metacritic && (
                       <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-neutral-900/80 border border-neutral-700 text-neutral-200 backdrop-blur-md">
@@ -100,12 +96,10 @@ export default function Hero({ games }: HeroProps) {
                     </span>
                   </div>
 
-                  {/* Title */}
                   <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-tight sm:leading-none drop-shadow-md">
                     {game.name}
                   </h1>
 
-                  {/* Rating & Genres */}
                   <div className="flex flex-wrap items-center gap-2.5 pt-1">
                     <div className="flex items-center gap-1.5 bg-neutral-900/80 border border-neutral-800 px-2.5 py-1 rounded-full backdrop-blur-md">
                       <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
@@ -127,7 +121,6 @@ export default function Hero({ games }: HeroProps) {
                     </div>
                   </div>
 
-                  {/* Platforms */}
                   {game.parent_platforms?.length > 0 && (
                     <div className="flex items-center gap-2 text-xs text-neutral-400 pt-1">
                       <span className="font-normal text-neutral-500">Platforms:</span>
@@ -144,12 +137,10 @@ export default function Hero({ games }: HeroProps) {
                     </div>
                   )}
 
-                  {/* Educational Project Note */}
                   <p className="text-[11px] text-neutral-400 max-w-xl pt-1">
                     Non-commercial educational project for portfolio purpose. Data provided by RAWG API.
                   </p>
 
-                  {/* CTA Action Buttons */}
                   <div className="flex flex-wrap items-center gap-3 pt-2">
                     <a
                       href={`#game-${game.id}`}
@@ -174,7 +165,6 @@ export default function Hero({ games }: HeroProps) {
         })}
       </Swiper>
 
-      {/* Custom Navigation Arrows */}
       <button
         aria-label="Previous slide"
         className="hero-prev-btn absolute left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-neutral-900/80 border border-neutral-800 backdrop-blur-md text-neutral-400 hover:text-white hover:bg-neutral-800 hover:border-neutral-700 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 hover:scale-105 focus:outline-none cursor-pointer hidden sm:flex"

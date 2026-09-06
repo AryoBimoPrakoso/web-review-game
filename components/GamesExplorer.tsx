@@ -23,7 +23,6 @@ export default function GamesExplorer({ games }: GamesExplorerProps) {
     "popular" | "metacritic" | "rating" | "year"
   >("popular");
 
-  // Extract all unique genres
   const allGenres = useMemo(() => {
     const set = new Set<string>();
     games.forEach((game) => {
@@ -32,11 +31,9 @@ export default function GamesExplorer({ games }: GamesExplorerProps) {
     return ["All", ...Array.from(set).slice(0, 8)];
   }, [games]);
 
-  // Filter & sort games
   const filteredGames = useMemo(() => {
     let result = [...games];
 
-    // Search filter
     if (searchQuery.trim()) {
       const q = searchQuery.toLowerCase();
       result = result.filter(
@@ -46,14 +43,12 @@ export default function GamesExplorer({ games }: GamesExplorerProps) {
       );
     }
 
-    // Genre filter
     if (selectedGenre !== "All") {
       result = result.filter((g) =>
         g.genre.some((genre) => genre.name === selectedGenre),
       );
     }
 
-    // Sorting
     if (sortBy === "metacritic") {
       result.sort((a, b) => (b.metacritic || 0) - (a.metacritic || 0));
     } else if (sortBy === "rating") {
@@ -75,16 +70,16 @@ export default function GamesExplorer({ games }: GamesExplorerProps) {
     startIndex,
     startIndex + ITEMS_PER_PAGE,
   );
+
   return (
     <section
       id="explore"
       className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16"
     >
-      {/* Section Header - Portfolio Minimalist Style */}
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-neutral-800/60">
         <div className="space-y-1.5">
           <span className="text-[11px] font-mono uppercase tracking-widest text-neutral-400">
-            {"// EXPLORE GAMES"}
+            EXPLORE GAMES
           </span>
           <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
             Curated Game Directory
@@ -95,7 +90,6 @@ export default function GamesExplorer({ games }: GamesExplorerProps) {
           </p>
         </div>
 
-        {/* Minimalist Search Bar */}
         <div className="relative w-full md:w-72">
           <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-neutral-500" />
           <input
@@ -119,9 +113,7 @@ export default function GamesExplorer({ games }: GamesExplorerProps) {
         </div>
       </div>
 
-      {/* Filter and Sort Pills */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 py-6">
-        {/* Genre Pills */}
         <div className="flex items-center gap-1.5 overflow-x-auto pb-2 sm:pb-0 scrollbar-none">
           {allGenres.map((genre) => {
             const isActive = selectedGenre === genre;
@@ -144,7 +136,6 @@ export default function GamesExplorer({ games }: GamesExplorerProps) {
           })}
         </div>
 
-        {/* Sort Selector */}
         <div className="flex items-center gap-2 shrink-0">
           <SlidersHorizontal className="w-3.5 h-3.5 text-neutral-500" />
           <span className="text-xs text-neutral-500">Sort by:</span>
@@ -165,7 +156,6 @@ export default function GamesExplorer({ games }: GamesExplorerProps) {
         </div>
       </div>
 
-      {/* Status Bar */}
       <div className="flex items-center justify-between text-[11px] text-neutral-400 pb-5">
         <span>
           Showing{" "}
@@ -182,7 +172,6 @@ export default function GamesExplorer({ games }: GamesExplorerProps) {
         )}
       </div>
 
-      {/* Game Cards Grid */}
       {filteredGames.length > 0 ? (
         <>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
@@ -191,7 +180,6 @@ export default function GamesExplorer({ games }: GamesExplorerProps) {
             ))}
           </div>
           <div className="flex items-center justify-center sm:justify-end gap-2 pt-6">
-            {/* Tombol Prev */}
             <button
               onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
               disabled={currentPage === 1}
@@ -201,12 +189,10 @@ export default function GamesExplorer({ games }: GamesExplorerProps) {
               <ArrowLeft className="w-4 h-4" />
             </button>
 
-            {/* Nomor Halaman */}
             <div className="px-3.5 h-9 rounded-full border border-neutral-800 bg-[#161616] text-xs font-mono text-neutral-300 flex items-center justify-center">
               {currentPage} / {totalPages || 1}
             </div>
 
-            {/* Tombol Next */}
             <button
               onClick={() =>
                 setCurrentPage((prev) => Math.min(prev + 1, totalPages))
@@ -220,7 +206,6 @@ export default function GamesExplorer({ games }: GamesExplorerProps) {
           </div>
         </>
       ) : (
-        /* Empty State */
         <div className="py-20 flex flex-col items-center justify-center text-center bg-[#161616] border border-neutral-800/80 rounded-2xl p-8">
           <div className="w-12 h-12 rounded-full bg-neutral-900 flex items-center justify-center text-neutral-500 mb-3 border border-neutral-800">
             <Search className="w-5 h-5" />

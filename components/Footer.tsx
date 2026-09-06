@@ -5,7 +5,6 @@ export default function Footer() {
     <footer className="relative z-10 w-full border-t border-neutral-800/60 bg-[#121212] mt-20 pt-16 pb-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 sm:gap-10 pb-12 border-b border-neutral-800/60">
-          {/* Col 1: Brand */}
           <div className="space-y-3 md:col-span-1">
             <span className="text-base font-bold tracking-tight text-white uppercase">
               Review Game
@@ -38,7 +37,6 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Col 2: Navigation */}
           <div className="space-y-2.5">
             <h4 className="text-xs font-mono uppercase tracking-wider text-neutral-300">
               Navigation
@@ -71,7 +69,6 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Col 3: Genres */}
           <div className="space-y-2.5">
             <h4 className="text-xs font-mono uppercase tracking-wider text-neutral-300">
               Categories
@@ -84,7 +81,6 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Col 4: Data Source */}
           <div className="space-y-2.5">
             <h4 className="text-xs font-mono uppercase tracking-wider text-neutral-300">
               Data &amp; API Source
@@ -111,7 +107,6 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Bottom Bar */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-neutral-400">
           <p className="text-center sm:text-left">
             © {new Date().getFullYear()} Review Game — Non-commercial

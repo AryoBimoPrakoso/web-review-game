@@ -44,7 +44,6 @@ export default function GridParticles() {
     []
   );
 
-  // Build offscreen grid canvas (drawn once, reused every frame)
   const buildGridCanvas = useCallback((w: number, h: number, dpr: number) => {
     const offscreen = document.createElement("canvas");
     offscreen.width = w * dpr;
@@ -58,7 +57,6 @@ export default function GridParticles() {
     offCtx.strokeStyle = "rgba(255, 255, 255, 0.04)";
     offCtx.lineWidth = 0.5;
 
-    // Square grid lines
     offCtx.beginPath();
     for (let x = 0; x <= w; x += gridSpacing) {
       offCtx.moveTo(x, 0);
@@ -70,7 +68,6 @@ export default function GridParticles() {
     }
     offCtx.stroke();
 
-    // Radial fade mask — grid fades toward edges
     const gradient = offCtx.createRadialGradient(
       w / 2, h * 0.4, w * 0.15,
       w / 2, h * 0.4, w * 0.75
@@ -105,21 +102,17 @@ export default function GridParticles() {
 
       sizeRef.current = { w, h };
 
-      // Rebuild grid cache
       gridCanvasRef.current = buildGridCanvas(w, h, dpr);
 
-      // Calculate particle count based on screen size
       const area = w * h;
       const count = Math.floor(area / 80000);
       const clampedCount = Math.max(2, Math.min(count, 6));
 
-      // Reset particles
       particlesRef.current = Array.from({ length: clampedCount }, () =>
         createParticle(w, h)
       );
     };
 
-    // Throttled mousemove (update at most every 16ms ≈ 60fps)
     let lastMouseUpdate = 0;
     const handleMouseMove = (e: MouseEvent) => {
       const now = e.timeStamp;
@@ -129,7 +122,6 @@ export default function GridParticles() {
       mouseRef.current.y = e.clientY;
     };
 
-    // Pause when tab is hidden
     const handleVisibility = () => {
       isPausedRef.current = document.hidden;
       if (!document.hidden && animationRef.current === 0) {
@@ -152,7 +144,6 @@ export default function GridParticles() {
 
       ctx.clearRect(0, 0, w, h);
 
-      // Blit cached grid (single drawImage instead of hundreds of stroke calls)
       if (gridCanvasRef.current) {
         ctx.drawImage(gridCanvasRef.current, 0, 0, w, h);
       }
@@ -164,7 +155,6 @@ export default function GridParticles() {
       for (let i = 0; i < particles.length; i++) {
         const p = particles[i];
 
-        // Update direction timer
         p.directionTimer++;
         if (p.directionTimer >= p.directionInterval) {
           p.directionTimer = 0;
@@ -175,44 +165,36 @@ export default function GridParticles() {
           p.directionInterval = 180 + Math.floor(Math.random() * 300);
         }
 
-        // Subtle mouse repulsion (avoid sqrt when possible)
         const dx = p.x - mx;
         const dy = p.y - my;
         const distSq = dx * dx + dy * dy;
         if (distSq < 14400 && distSq > 0) {
-          // 120^2 = 14400
           const dist = Math.sqrt(distSq);
           const force = (120 - dist) / 120;
           p.speedX += (dx / dist) * force * 0.02;
           p.speedY += (dy / dist) * force * 0.02;
         }
 
-        // Clamp speed
         const speedSq = p.speedX * p.speedX + p.speedY * p.speedY;
         if (speedSq > 0.64) {
-          // 0.8^2 = 0.64
           const currentSpeed = Math.sqrt(speedSq);
           p.speedX = (p.speedX / currentSpeed) * 0.8;
           p.speedY = (p.speedY / currentSpeed) * 0.8;
         }
 
-        // Store trail position (reuse object pool via circular buffer)
         p.trail.push({ x: p.x, y: p.y });
         if (p.trail.length > p.maxTrailLength) {
           p.trail.shift();
         }
 
-        // Move
         p.x += p.speedX;
         p.y += p.speedY;
 
-        // Wrap around edges
         if (p.x < -10) p.x = w + 10;
         else if (p.x > w + 10) p.x = -10;
         if (p.y < -10) p.y = h + 10;
         else if (p.y > h + 10) p.y = -10;
 
-        // Draw trail — batch by pre-computing values
         const trailLen = p.trail.length;
         const baseOpacity = p.opacity * 0.5;
         for (let t = 0; t < trailLen; t++) {
@@ -226,12 +208,10 @@ export default function GridParticles() {
           ctx.fillRect(trail.x - halfSize, trail.y - halfSize, trailSize, trailSize);
         }
 
-        // Draw particle (small square)
         ctx.globalAlpha = p.opacity;
         ctx.fillRect(p.x - p.size * 0.5, p.y - p.size * 0.5, p.size, p.size);
       }
 
-      // Reset globalAlpha
       ctx.globalAlpha = 1;
 
       animationRef.current = requestAnimationFrame(animate);
