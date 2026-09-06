@@ -84,8 +84,8 @@ export default function Hero({ games }: HeroProps) {
               <div className="absolute inset-0 bg-gradient-to-r from-[#121212]/95 via-[#121212]/70 to-transparent" />
 
               {/* Hero Content Overlay */}
-              <div className="relative z-10 h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-end pb-16 sm:pb-20 md:pb-24 pt-28">
-                <div className="max-w-2xl lg:max-w-3xl space-y-4">
+              <div className="relative z-10 h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-end pb-14 sm:pb-20 md:pb-24 pt-20 sm:pt-24 md:pt-28">
+                <div className="max-w-2xl lg:max-w-3xl space-y-3 sm:space-y-4">
                   {/* Badges & Meta Info */}
                   <div className="flex flex-wrap items-center gap-2">
                     {game.metacritic && (
@@ -101,7 +101,7 @@ export default function Hero({ games }: HeroProps) {
                   </div>
 
                   {/* Title */}
-                  <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-none drop-shadow-md">
+                  <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-tight sm:leading-none drop-shadow-md">
                     {game.name}
                   </h1>
 

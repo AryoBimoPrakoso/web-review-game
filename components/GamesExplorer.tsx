@@ -190,7 +190,7 @@ export default function GamesExplorer({ games }: GamesExplorerProps) {
               <CardItem key={game.id} game={game} />
             ))}
           </div>
-          <div className="flex items-center justify-end gap-2 pt-6">
+          <div className="flex items-center justify-center sm:justify-end gap-2 pt-6">
             {/* Tombol Prev */}
             <button
               onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}

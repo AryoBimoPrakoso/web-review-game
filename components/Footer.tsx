@@ -4,7 +4,7 @@ export default function Footer() {
   return (
     <footer className="relative z-10 w-full border-t border-neutral-800/60 bg-[#121212] mt-20 pt-16 pb-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 pb-12 border-b border-neutral-800/60">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 sm:gap-10 pb-12 border-b border-neutral-800/60">
           {/* Col 1: Brand */}
           <div className="space-y-3 md:col-span-1">
             <span className="text-base font-bold tracking-tight text-white uppercase">
@@ -113,7 +113,7 @@ export default function Footer() {
 
         {/* Bottom Bar */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-neutral-400">
-          <p>
+          <p className="text-center sm:text-left">
             © {new Date().getFullYear()} Review Game — Non-commercial
             educational portfolio.
           </p>

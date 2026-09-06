@@ -17,9 +17,9 @@ export const metadata: Metadata = {
   description:
     "An educational project showcasing video game reviews, ratings, platforms, and Metacritic scores powered by RAWG API.",
   icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon.ico",
-    apple: "/favicon.ico",
+    icon: "/favicon.ico?v=2",
+    shortcut: "/favicon.ico?v=2",
+    apple: "/favicon.ico?v=2",
   },
 };
 

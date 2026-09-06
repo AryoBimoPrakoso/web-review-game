@@ -29,7 +29,7 @@ export default async function Home() {
         {/* Minimalist Highlights / Stats Bar */}
         <section className="relative z-10 border-y border-neutral-800/60 bg-[#141414]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-            <div className="flex justify-between gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
               <div className="flex items-center gap-3">
                 <div className="w-9 h-9 rounded-xl bg-neutral-900 border border-neutral-800 flex items-center justify-center text-neutral-300 shrink-0">
                   <Gamepad2 className="w-4 h-4" />
@@ -84,7 +84,7 @@ export default async function Home() {
 
         {/* Minimalist Portfolio Project Card / Note Section */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-12">
-          <div className="relative overflow-hidden rounded-3xl bg-[#181818] border border-neutral-800/80 p-8 sm:p-12">
+          <div className="relative overflow-hidden rounded-3xl bg-[#181818] border border-neutral-800/80 p-6 sm:p-8 md:p-12">
             <div className="max-w-2xl space-y-4">
               <span className="text-[11px] font-mono uppercase tracking-widest text-neutral-400">
                 {"// PORTFOLIO PROJECT"}

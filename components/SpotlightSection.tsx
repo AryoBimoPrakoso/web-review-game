@@ -22,9 +22,9 @@ export default function SpotlightSection({ game }: SpotlightProps) {
   return (
     <section
       id="spotlight"
-      className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16"
+      className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16"
     >
-      <div className="relative overflow-hidden rounded-3xl bg-[#181818] border border-neutral-800/80 p-6 sm:p-8 lg:p-10">
+      <div className="relative overflow-hidden rounded-3xl bg-[#181818] border border-neutral-800/80 p-5 sm:p-8 lg:p-10">
         {/* Section Header */}
         <div className="flex items-center gap-2 mb-6">
           <span className="text-[11px] font-mono uppercase tracking-widest text-neutral-400">
@@ -58,33 +58,33 @@ export default function SpotlightSection({ game }: SpotlightProps) {
             </div>
 
             {/* Score & Rating stats */}
-            <div className="grid grid-cols-3 gap-2.5">
-              <div className="bg-[#141414] border border-neutral-800/80 rounded-xl p-3 text-center">
+            <div className="grid grid-cols-3 gap-1.5 sm:gap-2.5">
+              <div className="bg-[#141414] border border-neutral-800/80 rounded-xl p-2.5 sm:p-3 text-center">
                 <div className="flex items-center justify-center gap-1 text-neutral-200 mb-0.5">
                   <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-                  <span className="text-sm font-semibold text-white">
+                  <span className="text-xs sm:text-sm font-semibold text-white">
                     {game.rating.toFixed(1)}
                   </span>
                 </div>
-                <div className="text-[10px] font-medium text-neutral-500 uppercase tracking-wider">
+                <div className="text-[9px] sm:text-[10px] font-medium text-neutral-500 uppercase tracking-wider">
                   User Rating
                 </div>
               </div>
 
-              <div className="bg-[#141414] border border-neutral-800/80 rounded-xl p-3 text-center">
-                <div className="text-sm font-semibold text-white mb-0.5">
+              <div className="bg-[#141414] border border-neutral-800/80 rounded-xl p-2.5 sm:p-3 text-center">
+                <div className="text-xs sm:text-sm font-semibold text-white mb-0.5">
                   {game.metacritic || 95}
                 </div>
-                <div className="text-[10px] font-medium text-neutral-500 uppercase tracking-wider">
+                <div className="text-[9px] sm:text-[10px] font-medium text-neutral-500 uppercase tracking-wider">
                   Metacritic
                 </div>
               </div>
 
-              <div className="bg-[#141414] border border-neutral-800/80 rounded-xl p-3 text-center">
-                <div className="text-sm font-semibold text-white mb-0.5 line-clamp-1">
+              <div className="bg-[#141414] border border-neutral-800/80 rounded-xl p-2.5 sm:p-3 text-center">
+                <div className="text-xs sm:text-sm font-semibold text-white mb-0.5 line-clamp-1">
                   {game.genre[0]?.name || "Action"}
                 </div>
-                <div className="text-[10px] font-medium text-neutral-500 uppercase tracking-wider">
+                <div className="text-[9px] sm:text-[10px] font-medium text-neutral-500 uppercase tracking-wider">
                   Genre
                 </div>
               </div>
