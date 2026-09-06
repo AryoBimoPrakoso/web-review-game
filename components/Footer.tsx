@@ -24,7 +24,7 @@ export default function Footer() {
                 <Globe className="w-4 h-4" />
               </a>
               <a
-                href="https://github.com"
+                href="https://github.com/AryoBimoPrakoso"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-white transition-colors"
